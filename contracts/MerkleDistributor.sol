@@ -13,7 +13,7 @@ contract MerkleDistributor is IMerkleDistributor {
   // This is a packed array of booleans.
   mapping(uint256 => uint256) private claimedBitMap;
 
-  // DrOpium
+  // Opium Bonus
   uint256 public constant MAX_BONUS = 0.3e18;
   uint256 public constant PERCENTAGE_BASE = 1e18;
 
@@ -40,7 +40,7 @@ contract MerkleDistributor is IMerkleDistributor {
   ) {
     token = token_;
     merkleRoot = merkleRoot_;
-    // DrOpium
+    // Opium Bonus
     totalClaims = _totalClaims;
     initialPoolSize = _initialPoolSize;
     currentPoolSize = _initialPoolSize;
