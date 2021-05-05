@@ -1,0 +1,14 @@
+node_modules
+.envrc
+.DS_Store
+coverage
+coverage.json
+
+deployments/ganache
+deployments/rinkeby
+
+#Hardhat files
+cache
+artifacts
+
+.env
