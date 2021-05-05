@@ -11,6 +11,8 @@
     "hardhat-contract-sizer": "^2.0.3",
     "hardhat-deploy": "^0.7.5",
     "hardhat-gas-reporter": "^1.0.4",
+    "prettier": "^2.2.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.10",
     "solidity-coverage": "^0.7.16"
   }
 }
