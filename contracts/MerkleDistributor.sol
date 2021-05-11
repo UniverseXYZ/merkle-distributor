@@ -35,8 +35,7 @@ contract MerkleDistributor is IMerkleDistributor {
     uint256 _initialPoolSize,
     uint256 _bonusStart,
     uint256 _bonusEnd,
-    uint256 _emergencyTimeout,
-    address _deployer
+    uint256 _emergencyTimeout
   ) {
     token = token_;
     merkleRoot = merkleRoot_;
@@ -48,7 +47,7 @@ contract MerkleDistributor is IMerkleDistributor {
     bonusStart = _bonusStart;
     bonusEnd = _bonusEnd;
     emergencyTimeout = _emergencyTimeout;
-    deployer = _deployer;
+    deployer = msg.sender;
     require(bonusStart < bonusEnd, "WRONG_BONUS_TIME");
     require(emergencyTimeout > bonusEnd, "WRONG_EMERGENCY_TIMEOUT");
   }

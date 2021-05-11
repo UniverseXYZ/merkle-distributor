@@ -1,9 +1,12 @@
+require("dotenv").config();
+
 import "@nomiclabs/hardhat-waffle";
 import "@nomiclabs/hardhat-etherscan";
 import "solidity-coverage";
 import "hardhat-contract-sizer";
 import "hardhat-deploy";
 import "hardhat-gas-reporter";
+import "@typechain/hardhat";
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
