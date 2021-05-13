@@ -7,13 +7,16 @@ import BalanceTree from "../src/balance-tree";
 
 describe("Token", function () {
 	let accounts: Signer[];
-	// TODO: update for correct values
+
 	let token: XYZ;
 	let tree: BalanceTree;
 	const totalClaims = 2;
 	const initialPoolSize = ethers.utils.parseEther("300");
+	// TODO: update for correct values
 	const bonusStart = ethers.utils.parseEther("100");
+	// TODO: update for correct values
 	const bonusEnd = ethers.utils.parseEther("300");
+	// TODO: update for correct values
 	const emergencyTimeout = ethers.utils.parseEther("500");
 	let merkle: MerkleDistributor;
 	let account0: string;

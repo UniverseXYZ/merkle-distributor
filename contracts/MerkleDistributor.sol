@@ -26,7 +26,7 @@ contract MerkleDistributor is IMerkleDistributor {
   uint256 public bonusStart;
   uint256 public bonusEnd;
   uint256 public emergencyTimeout;
-  address public deployer;
+  address public emergencyReceiver;
 
   constructor(
     address token_,
@@ -35,7 +35,8 @@ contract MerkleDistributor is IMerkleDistributor {
     uint256 _initialPoolSize,
     uint256 _bonusStart,
     uint256 _bonusEnd,
-    uint256 _emergencyTimeout
+    uint256 _emergencyTimeout,
+    address _emergencyReceiver
   ) {
     token = token_;
     merkleRoot = merkleRoot_;
@@ -47,7 +48,7 @@ contract MerkleDistributor is IMerkleDistributor {
     bonusStart = _bonusStart;
     bonusEnd = _bonusEnd;
     emergencyTimeout = _emergencyTimeout;
-    deployer = msg.sender;
+    emergencyReceiver = _emergencyReceiver;
     require(bonusStart < bonusEnd, "WRONG_BONUS_TIME");
     require(emergencyTimeout > bonusEnd, "WRONG_EMERGENCY_TIMEOUT");
   }
@@ -152,6 +153,9 @@ contract MerkleDistributor is IMerkleDistributor {
 
   function emergencyWithdrawal() public {
     require(block.timestamp > emergencyTimeout, "TIMEOUT_NOT_EXPIRED");
-    IERC20(token).transfer(deployer, IERC20(token).balanceOf(address(this)));
+    IERC20(token).transfer(
+      emergencyReceiver,
+      IERC20(token).balanceOf(address(this))
+    );
   }
 }

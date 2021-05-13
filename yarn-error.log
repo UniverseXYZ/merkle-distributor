@@ -1,5 +1,5 @@
 Arguments: 
-  /home/crisgarner/.nvm/versions/node/v12.0.0/bin/node /home/crisgarner/.nvm/versions/node/v12.0.0/bin/yarn add -D chai
+  /home/crisgarner/.nvm/versions/node/v12.0.0/bin/node /home/crisgarner/.nvm/versions/node/v12.0.0/bin/yarn add hardhat-deploy -D
 
 PATH: 
   /home/crisgarner/.nvm/versions/node/v12.0.0/bin:/home/crisgarner/.cargo/bin:/home/crisgarner/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/crisgarner/go/bin:/home/crisgarner/go/bin:/usr/local/go/bin:/home/crisgarner/.cargo/bin:/home/crisgarner/.local/bin:/home/crisgarner/.radicle/bin
@@ -34,6 +34,7 @@ npm manifest:
   		"compile": "npx hardhat compile",
   		"pretest": "yarn compile",
   		"test": "npx hardhat test",
+  		"deploy": "npx hardhat deploy",
   		"generate-merkle-root": "ts-node scripts/generate-merkle-root.ts",
   		"generate-merkle-root:example": "ts-node scripts/generate-merkle-root.ts --input scripts/example.json",
   		"prepublishOnly": "yarn test"
