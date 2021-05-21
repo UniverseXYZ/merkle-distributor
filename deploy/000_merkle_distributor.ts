@@ -16,12 +16,12 @@ const MerkleDistributor: DeployFunction = async function (hre: HardhatRuntimeEnv
 	const ethers = hre.ethers;
 	const merkleDistributor = await deployments.getOrNull("MerkleDistributor");
 
-	const TOKEN_ADDRESS = "0x888888888889c00c67689029d7856aac1065ec11";
-	const ECOSYSTEM = "0xdbc2f7f3bccccf54f1bda43c57e8ab526e379df1";
+	const TOKEN_ADDRESS = "0x86dEddCFc3a7DBeE68cDADA65Eed3D3b70F4fe24";
+	const ECOSYSTEM = "0x2D5AB5A00b78093f1ce41B9355043aB670A9A92A";
 
-	const START = 1620044574; // 05/03/2021 @ 12:22pm (UTC)
-	const END = 1627820574; // 08/01/2021 @ 12:22pm (UTC)
-	const EMERGENCY_TIMEOUT = 1630412574; // 08/31/2021 @ 12:22pm (UTC)
+	const START = 1621539638; // 021-05-20 13:40:38
+	const END = 1621798838; // 2021-05-23 13:40:38
+	const EMERGENCY_TIMEOUT = 1621978838; // 2021-05-25 15:40:38
 
 	const airdropAccounts = airdrop.map((drop) => ({
 		account: drop.address,

@@ -11,9 +11,12 @@ import "@typechain/hardhat";
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
+const mnemonic = process.env.MNENOMIC as string;
+
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
+
 module.exports = {
 	namedAccounts: {
 		deployer: {
@@ -42,7 +45,7 @@ module.exports = {
 		rinkeby: {
 			chainId: 4,
 			url: `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
-			accounts: [process.env.PRIVATE_KEY],
+			accounts: { mnemonic: mnemonic },
 		},
 	},
 	etherscan: {
