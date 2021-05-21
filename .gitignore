@@ -5,7 +5,7 @@ coverage
 coverage.json
 
 deployments/ganache
-deployments/rinkeby
+
 
 #Hardhat files
 cache
