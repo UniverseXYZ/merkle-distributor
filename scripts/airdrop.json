@@ -493,5 +493,6 @@
 	{ "address": "0xae667ed58c0d9198fc0b9261156d48296c1bb3da", "earnings": "0x10F0CF064DD59200000" },
 	{ "address": "0xe78b6b110ae088c8e087cd2d04f310f7526c7b23", "earnings": "0x10F0CF064DD59200000" },
 	{ "address": "0x08e5e4df2f56be734ead5c80a3b2377616210a62", "earnings": "0x10F0CF064DD59200000" },
-	{ "address": "0x35e3564c86bc0b5548a3be3a9a1e71eb1455fad2", "earnings": "0x10F0CF064DD59200000" }
+	{ "address": "0x35e3564c86bc0b5548a3be3a9a1e71eb1455fad2", "earnings": "0x10F0CF064DD59200000" },
+	{ "address": "0x2Cc59E9F8516EA5B71128a094128c3064D044A1c", "earnings": "0x21E19E0C9BAB2400000" }
 ]
