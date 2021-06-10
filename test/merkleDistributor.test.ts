@@ -45,7 +45,8 @@ describe("Token", function () {
 			initialPoolSize,
 			bonusStart,
 			bonusEnd,
-			emergencyTimeout
+			emergencyTimeout,
+			account0
 		);
 
 		await token.mint(merkle.address, ethers.utils.parseEther("300"));
