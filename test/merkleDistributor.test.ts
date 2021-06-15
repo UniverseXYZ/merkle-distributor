@@ -77,25 +77,25 @@ describe("Token", function () {
 	});
 
 	it("should allow to claim", async () => {
+		await ethers.provider.send("evm_mine", []);
 		const proof0 = tree.getProof(0, account0, ethers.utils.parseEther("100"));
 		await expect(merkle.claim(0, account0, ethers.utils.parseEther("100"), proof0)).to.emit(
 			merkle,
 			"Claimed"
 		);
-
+		await ethers.provider.send("evm_mine", []);
 		const proof1 = tree.getProof(1, account1, ethers.utils.parseEther("200"));
-		await expect(merkle.claim(1, account1, ethers.utils.parseEther("200"), proof1)).to.emit(
-			merkle,
-			"Claimed"
-		);
+		await expect(
+			merkle.connect(accounts[1]).claim(1, account1, ethers.utils.parseEther("200"), proof1)
+		).to.emit(merkle, "Claimed");
 
 		// expect first claimer to have less bonus
 		const balance0 = await token.balanceOf(account0);
-		expect(balance0.lt(ethers.utils.parseEther("100")));
+		expect(balance0.lt(ethers.utils.parseEther("100"))).to.eq(true);
 
 		// expect last claimer to greater bonus
 		const balance1 = await token.balanceOf(account1);
-		expect(balance1.gt(ethers.utils.parseEther("200")));
+		expect(balance1.gt(ethers.utils.parseEther("200"))).to.eq(true);
 	});
 
 	it("should have invalid claims", async () => {
