@@ -25,7 +25,7 @@ const MerkleDistributor: DeployFunction = async function (hre: HardhatRuntimeEnv
 
 	const airdropAccounts = airdrop.map((drop) => ({
 		account: drop.address,
-		amount: BigNumber.from(ethers.BigNumber.from(drop.earnings.toString())),
+		amount: ethers.utils.parseEther(drop.earnings.toString()),
 	}));
 
 	const { log } = deployments;
