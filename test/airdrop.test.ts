@@ -9,6 +9,7 @@ import { expect } from "chai";
 import BalanceTree from "../src/balance-tree";
 import airdrop from "../scripts/airdrop-test.json";
 import { BigNumber } from "ethers";
+import { id } from "ethers/lib/utils";
 
 const calculateTotalAirdrop = (accounts: any) => {
 	return accounts.reduce(
@@ -95,44 +96,63 @@ describe("Token", function () {
 		expect(claim).to.eq(false);
 	});
 
-	it("should allow to claim", async () => {
-		// Time skips uncomment to allow a time skip
-		// await ethers.provider.send("evm_increaseTime", [TIME_SKIP]);
-		// await ethers.provider.send("evm_mine", []);
+	// it("should allow to claim", async () => {
+	// 	// Time skips uncomment to allow a time skip
+	// 	// await ethers.provider.send("evm_increaseTime", [TIME_SKIP]);
+	// 	// await ethers.provider.send("evm_mine", []);
 
-		const proof0 = tree.getProof(0, account0, ethers.utils.parseEther("200000"));
+	// 	const proof0 = tree.getProof(0, account0, ethers.utils.parseEther("200000"));
 
-		await expect(merkle.claim(0, account0, ethers.utils.parseEther("200000"), proof0)).to.emit(
-			merkle,
-			"Claimed"
-		);
+	// 	await expect(merkle.claim(0, account0, ethers.utils.parseEther("200000"), proof0)).to.emit(
+	// 		merkle,
+	// 		"Claimed"
+	// 	);
 
-		const proof1 = tree.getProof(1, account1, ethers.utils.parseEther("200000"));
-		await expect(
-			merkle.connect(accounts[1]).claim(1, account1, ethers.utils.parseEther("200000"), proof1)
-		).to.emit(merkle, "Claimed");
+	// 	const proof1 = tree.getProof(1, account1, ethers.utils.parseEther("200000"));
+	// 	await expect(
+	// 		merkle.connect(accounts[1]).claim(1, account1, ethers.utils.parseEther("200000"), proof1)
+	// 	).to.emit(merkle, "Claimed");
 
-		// expect first claimer to have less bonus
-		const balance0 = await token.balanceOf(account0);
-		expect(balance0.lt(ethers.utils.parseEther("200000")));
-		console.log(
-			"🚀 ~ file: airdrop.test.ts ~ line 112 ~ it ~ balance0",
-			ethers.utils.formatEther(balance0)
-		);
+	// 	// expect first claimer to have less bonus
+	// 	const balance0 = await token.balanceOf(account0);
+	// 	expect(balance0.lt(ethers.utils.parseEther("200000")));
+	// 	console.log(
+	// 		"🚀 ~ file: airdrop.test.ts ~ line 112 ~ it ~ balance0",
+	// 		ethers.utils.formatEther(balance0)
+	// 	);
 
-		//	expect last claimer to greater bonus
-		const balance1 = await token.balanceOf(account1);
-		console.log(
-			"🚀 ~ file: airdrop.test.ts ~ line 115 ~ it ~ balance1",
-			ethers.utils.formatEther(balance1)
-		);
-		expect(balance1.gt(ethers.utils.parseEther("200000")));
-	});
+	// 	//	expect last claimer to greater bonus
+	// 	const balance1 = await token.balanceOf(account1);
+	// 	console.log(
+	// 		"🚀 ~ file: airdrop.test.ts ~ line 115 ~ it ~ balance1",
+	// 		ethers.utils.formatEther(balance1)
+	// 	);
+	// 	expect(balance1.gt(ethers.utils.parseEther("200000")));
+	// });
 
-	it("should have invalid claims", async () => {
-		let claim = await merkle.isClaimed(0);
-		expect(claim).to.eq(true);
-		claim = await merkle.isClaimed(1);
-		expect(claim).to.eq(true);
+	// it("should have invalid claims", async () => {
+	// 	let claim = await merkle.isClaimed(0);
+	// 	expect(claim).to.eq(true);
+	// 	claim = await merkle.isClaimed(1);
+	// 	expect(claim).to.eq(true);
+	// });
+
+	it("should claim all", async () => {
+		let balance = await token.balanceOf(merkle.address);
+		console.log(ethers.utils.formatEther(balance));
+		for (let i = 0; i < airdropAccounts.length; i++) {
+			const proof1 = tree.getProof(i, airdropAccounts[i].account, airdropAccounts[i].amount);
+			await expect(
+				merkle
+					.connect(accounts[1])
+					.claim(i, airdropAccounts[i].account, airdropAccounts[i].amount, proof1)
+			).to.emit(merkle, "Claimed");
+			const balance1 = await token.balanceOf(airdropAccounts[i].account);
+			console.log("balance: " + i + " ", ethers.utils.formatEther(balance1));
+			if (i == 495) {
+				balance = await token.balanceOf(merkle.address);
+				console.log(ethers.utils.formatEther(balance));
+			}
+		}
 	});
 });

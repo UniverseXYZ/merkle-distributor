@@ -14,7 +14,7 @@ contract MerkleDistributor is IMerkleDistributor {
   mapping(uint256 => uint256) private claimedBitMap;
 
   // Opium Bonus
-  uint256 public constant MAX_BONUS = 0.3e18;
+  uint256 public constant MAX_BONUS = 0.999e18;
   uint256 public constant PERCENTAGE_BASE = 1e18;
 
   uint256 public totalClaims;
