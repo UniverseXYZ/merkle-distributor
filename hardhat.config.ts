@@ -40,7 +40,7 @@ module.exports = {
 		ropsten: {
 			chainId: 3,
 			url: `https://ropsten.infura.io/v3/${process.env.INFURA_API_KEY}`,
-			accounts: [process.env.PRIVATE_KEY],
+			accounts: { mnemonic: mnemonic },
 		},
 		rinkeby: {
 			chainId: 4,
