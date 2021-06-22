@@ -16,7 +16,7 @@ const MerkleDistributor: DeployFunction = async function (hre: HardhatRuntimeEnv
 	const ethers = hre.ethers;
 	const merkleDistributor = await deployments.getOrNull("MerkleDistributor");
 
-	const TOKEN_ADDRESS = "0x86dEddCFc3a7DBeE68cDADA65Eed3D3b70F4fe24";
+	const TOKEN_ADDRESS = "0x41E88dc0dfA5455E64327484F1862332413520da";
 	const ECOSYSTEM = "0x2D5AB5A00b78093f1ce41B9355043aB670A9A92A";
 
 	const START = 1623979526; // 2021-06-17 19:25:26
