@@ -1,7 +1,7 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
 import { deployments } from "hardhat";
-import airdrop from "../scripts/airdrop.json";
+import airdrop from "../scripts/airdrop-test.json";
 import BalanceTree from "../src/balance-tree";
 import { BigNumber } from "ethers";
 
