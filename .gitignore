@@ -13,3 +13,5 @@ artifacts
 
 .env
 typechain
+
+.idea/
