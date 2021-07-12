@@ -3,8 +3,8 @@
 
 import { ethers } from "hardhat";
 import { Signer } from "ethers";
-import { MerkleDistributor } from "../typechain/MerkleDistributor";
-import { XYZ } from "../typechain/XYZ";
+import { MerkleDistributor } from "../typechain";
+import { XYZ } from "../typechain";
 import { expect } from "chai";
 import BalanceTree from "../src/balance-tree";
 import airdrop from "../scripts/airdrop-test.json";
@@ -44,7 +44,7 @@ describe("Token", function () {
 	});
 
 	it("should deploy contract", async () => {
-		//These addreses where added to the airdrop-test.json
+		//These addresses where added to the airdrop-test.json
 		account0 = await accounts[0].getAddress();
 		account1 = await accounts[1].getAddress();
 
@@ -53,10 +53,10 @@ describe("Token", function () {
 		const totalAllocatedAirdrop = calculateTotalAirdrop(airdropAccounts);
 
 		const XYZContract = await ethers.getContractFactory("XYZ");
-		token = await XYZContract.deploy();
+		token = <XYZ>await XYZContract.deploy();
 
-		const MekleDistributor = await ethers.getContractFactory("MerkleDistributor");
-		merkle = await MekleDistributor.deploy(
+		const MerkleDistributor = await ethers.getContractFactory("MerkleDistributor");
+		merkle = <MerkleDistributor>await MerkleDistributor.deploy(
 			token.address,
 			root,
 			airdropAccounts.length,
