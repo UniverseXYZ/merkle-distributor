@@ -7,7 +7,7 @@ import { MerkleDistributor } from "../typechain";
 import { XYZ } from "../typechain";
 import { expect } from "chai";
 import BalanceTree from "../src/balance-tree";
-import airdrop from "../scripts/airdrop-test.json";
+import airdrop from "../scripts/airdrop.json";
 import { BigNumber } from "ethers";
 import { id } from "ethers/lib/utils";
 
@@ -144,10 +144,10 @@ describe("Token", function() {
 		let total: BigNumber = BigNumber.from(0);
 		console.log(ethers.utils.formatEther(balance));
 		for (let i = 0; i < airdropAccounts.length; i++) {
-			if(i == 2){
-			await ethers.provider.send("evm_increaseTime", [TIME_SKIP]);
-			await ethers.provider.send("evm_mine", []);
-		}
+			// if (i == 2) {
+			// 	await ethers.provider.send("evm_increaseTime", [TIME_SKIP]);
+			// 	await ethers.provider.send("evm_mine", []);
+			// }
 			const proof1 = tree.getProof(i, airdropAccounts[i].account, airdropAccounts[i].amount);
 			await expect(
 				merkle
