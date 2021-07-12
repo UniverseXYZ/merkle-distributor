@@ -18,17 +18,18 @@ const calculateTotalAirdrop = (accounts: any) => {
 	);
 };
 
-describe("Token", function () {
+describe("Token", function() {
+	this.timeout(40000);
 	let accounts: Signer[];
 
 	let token: XYZ;
 	let tree: BalanceTree;
 	const ECOSYSTEM = "0x2D5AB5A00b78093f1ce41B9355043aB670A9A92A";
 
-	const START = 1623173126; // 6/8/2021, 11:25:26 AM
-	const END = 1633742726; // 2021-10-08 19:25:26
-	const EMERGENCY_TIMEOUT = 1636421126; //2021-11-08 19:25:26
-	const TIME_SKIP = 1633742726 - 100; // Amount of time to skip, right now is almost at the end of the rewards
+	const START = Math.floor(Date.now() / 1000);
+	const END = START + (60 * 60 * 24 * 7 * 100); // 100 weeks
+	const EMERGENCY_TIMEOUT = END + (60 * 60 * 24 * 7 * 4); // 104 weeks
+	const TIME_SKIP = END - 100; // Amount of time to skip, right now is almost at the end of the rewards
 
 	let merkle: MerkleDistributor;
 	let account0: string;
@@ -36,10 +37,10 @@ describe("Token", function () {
 
 	const airdropAccounts = airdrop.map((drop) => ({
 		account: drop.address,
-		amount: ethers.utils.parseEther(drop.earnings.toString()),
+		amount: ethers.utils.parseEther(drop.earnings.toString())
 	}));
 
-	beforeEach(async function () {
+	beforeEach(async function() {
 		accounts = await ethers.getSigners();
 	});
 
@@ -138,9 +139,15 @@ describe("Token", function () {
 	// });
 
 	it("should claim all", async () => {
+
 		let balance = await token.balanceOf(merkle.address);
+		let total: BigNumber = BigNumber.from(0);
 		console.log(ethers.utils.formatEther(balance));
 		for (let i = 0; i < airdropAccounts.length; i++) {
+			if(i == 2){
+			await ethers.provider.send("evm_increaseTime", [TIME_SKIP]);
+			await ethers.provider.send("evm_mine", []);
+		}
 			const proof1 = tree.getProof(i, airdropAccounts[i].account, airdropAccounts[i].amount);
 			await expect(
 				merkle
@@ -148,10 +155,12 @@ describe("Token", function () {
 					.claim(i, airdropAccounts[i].account, airdropAccounts[i].amount, proof1)
 			).to.emit(merkle, "Claimed");
 			const balance1 = await token.balanceOf(airdropAccounts[i].account);
+			total = total.add(balance1);
 			console.log("balance: " + i + " ", ethers.utils.formatEther(balance1));
-			if (i == 495) {
+			if (i == 1793) {
 				balance = await token.balanceOf(merkle.address);
 				console.log(ethers.utils.formatEther(balance));
+				console.log("total balance claimed = ", ethers.utils.formatEther(total));
 			}
 		}
 	});
