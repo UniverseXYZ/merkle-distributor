@@ -1,5 +1,5 @@
 import { ethers } from "hardhat";
-import { Signer } from "ethers";
+import { Contract, Signer } from "ethers";
 import { MerkleDistributor } from "../typechain/MerkleDistributor";
 import { XYZ } from "../typechain/XYZ";
 import { expect } from "chai";

@@ -47,6 +47,11 @@ module.exports = {
 			url: `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
 			accounts: { mnemonic: mnemonic },
 		},
+		mainnet: {
+			chainId: 1,
+			url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+			accounts: { mnemonic: mnemonic },
+		}
 	},
 	etherscan: {
 		apiKey: process.env.ETHERSCAN_API_KEY,
@@ -58,7 +63,7 @@ module.exports = {
 	},
 	gasReporter: {
 		currency: "USD",
-		gasPrice: 47,
+		gasPrice: 51,
 		enabled: process.env.REPORT_GAS == "true" ? true : false,
 		coinmarketcap: process.env.CMC_API_KEY,
 	},
