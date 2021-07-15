@@ -19,9 +19,9 @@ const MerkleDistributor: DeployFunction = async function (hre: HardhatRuntimeEnv
 	const TOKEN_ADDRESS = "0x41E88dc0dfA5455E64327484F1862332413520da";
 	const ECOSYSTEM = "0x2D5AB5A00b78093f1ce41B9355043aB670A9A92A";
 
-	const START = 1623979526; // 2021-06-17 19:25:26
-	const END = 1631928326; // 2021-09-17 19:25:26
-	const EMERGENCY_TIMEOUT = 1634520326; // 2021-10-17 19:25:26
+	const START = 1626242400; // 2021-07-14 0:00:00
+	const END = START + (60 * 60 * 24 * 7 * 100); // 100 weeks
+	const EMERGENCY_TIMEOUT = END + (60 * 60 * 24 * 7 * 4); // 104 weeks
 
 	const airdropAccounts = airdrop.map((drop) => ({
 		account: drop.address,
