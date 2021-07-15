@@ -1,7 +1,7 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
 import { deployments } from "hardhat";
-import airdrop from "../scripts/airdrop-test.json"; // TODO: Change to mainnet file
+import airdrop from "../scripts/airdrop.json";
 import BalanceTree from "../src/balance-tree";
 import { BigNumber } from "ethers";
 
@@ -18,11 +18,10 @@ const MerkleDistributor: DeployFunction = async function (hre: HardhatRuntimeEnv
 
 	// Mainnet params
 	const TOKEN_ADDRESS = "0x618679df9efcd19694bb1daa8d00718eacfa2883";
-	const ECOSYSTEM = "0x2D5AB5A00b78093f1ce41B9355043aB670A9A92A";
-	const START = 1626242400; // 2021-07-14 0:00:00
+	const ECOSYSTEM = "0x75237802D46A40C4be57f518A7902528Be688Dfc";
+	const START = 1626674400; // 2021-07-19 00:00:00
 	const END = START + (60 * 60 * 24 * 7 * 100); // 100 weeks
-	const EMERGENCY_TIMEOUT = END + (60 * 60 * 24 * 7 * 4); // 104 weeks
-
+	const EMERGENCY_TIMEOUT = END + (60 * 60 * 24 * 7 * 69); // 169 weeks
 	const airdropAccounts = airdrop.map((drop) => ({
 		account: drop.address,
 		amount: ethers.utils.parseEther(drop.earnings.toString()),
