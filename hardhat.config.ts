@@ -20,51 +20,56 @@ const mnemonic = process.env.MNENOMIC as string;
 module.exports = {
 	namedAccounts: {
 		deployer: {
-			default: 0, // here this will by default take the first account as deployer
-		},
+			default: 0 // here this will by default take the first account as deployer
+		}
 	},
 	solidity: {
 		version: "0.7.3",
 		settings: {
 			optimizer: {
 				enabled: true,
-				runs: 200,
-			},
-		},
+				runs: 200
+			}
+		}
 	},
 	networks: {
+		hardhat: {
+			forking: {
+				url: process.env.MAINNET_API_URL as string
+			}
+		},
 		ganache: {
 			url: "HTTP://127.0.0.1:7545",
-			accounts: [process.env.PRIVATE_KEY],
+			accounts: [process.env.PRIVATE_KEY]
 		},
 		ropsten: {
 			chainId: 3,
 			url: `https://ropsten.infura.io/v3/${process.env.INFURA_API_KEY}`,
-			accounts: { mnemonic: mnemonic },
+			accounts: { mnemonic: mnemonic }
 		},
 		rinkeby: {
 			chainId: 4,
 			url: `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
-			accounts: { mnemonic: mnemonic },
+			accounts: { mnemonic: mnemonic }
 		},
 		mainnet: {
 			chainId: 1,
 			url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
-			accounts: { mnemonic: mnemonic },
+			accounts: { mnemonic: mnemonic }
 		}
 	},
 	etherscan: {
-		apiKey: process.env.ETHERSCAN_API_KEY,
+		apiKey: process.env.ETHERSCAN_API_KEY
 	},
 	contractSizer: {
 		alphaSort: true,
 		runOnCompile: true,
-		disambiguatePaths: false,
+		disambiguatePaths: false
 	},
 	gasReporter: {
 		currency: "USD",
 		gasPrice: 51,
 		enabled: process.env.REPORT_GAS == "true" ? true : false,
-		coinmarketcap: process.env.CMC_API_KEY,
-	},
+		coinmarketcap: process.env.CMC_API_KEY
+	}
 };
